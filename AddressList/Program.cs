@@ -47,13 +47,17 @@ namespace PhoneListApp
             {
                 Console.Write("Commmand: ");
                 command = Console.ReadLine();
-                if (command == "Help")
+                if (command == "help")
                 {
-                    Console.WriteLine($"Command not implemented!");
+                    Console.WriteLine($"Commands: add, remove, list, quit");
                 }
                 else if (command == "add")
                 {
-                    addContact();
+                    if (contactList.Count == 9)
+                        Console.WriteLine("Please remove a contact before adding more");
+                       
+                    else
+                        addContact();
                 }
                 else if (command == "remove")
                 {
@@ -89,8 +93,29 @@ namespace PhoneListApp
 
             Console.WriteLine($"Added {newcontact.Name} {newcontact.Address}{newcontact.PhoneNumber}.");
         }
-        public static void removeContact() { }
-        public static void listContacts() {
+        public static void removeContact() 
+            {
+                Console.Write("Enter the name of the contact you want to remove: ");
+                string name = Console.ReadLine();
+                bool removed = false;
+
+                foreach (Contact contact in contactList)
+                {
+                    if (contact.Name == name)
+                    {
+                        contactList.Remove(contact);
+                        Console.WriteLine($"Removed {contact.Name} {contact.Address} {contact.PhoneNumber}.");
+                        removed = true;
+                        break;
+                    }
+                }
+
+                if (!removed)
+                {
+                    Console.WriteLine($"No contact found with name {name}.");
+                }
+            }
+            public static void listContacts() {
             foreach (Contact a in contactList)
             {
                 Console.WriteLine($"{a.Name} {a.Address} {a.PhoneNumber}");
@@ -100,5 +125,4 @@ namespace PhoneListApp
     }
 }
 
-//Mål: vi vill ha en telefonlista som kan innehålla max 10 kontaktadresser, vilket bör implementeras som en lista av objekt. Vi vill att följande operationer skall finnas i telefonlistan:
 
