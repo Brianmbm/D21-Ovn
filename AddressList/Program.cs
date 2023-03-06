@@ -19,7 +19,7 @@ namespace PhoneListApp
         public string PhoneNumber { get; set; }
 
     }
-    List<Contact> contactList = new List<Contact>();
+    //List<Contact> contactList = new List<Contact>();
     internal class Program
     {
         static void Main(string[] args)
